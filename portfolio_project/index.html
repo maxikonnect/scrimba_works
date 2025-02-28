@@ -4,21 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/styles/styles.css">
-    <title>Portfolio</title>
+    <title>Document</title>
 </head>
 <body>
     <header class="header">
         <nav class="navbar">
             <ul class="nav-list">
-                <li class="nav-list-item">Home</li>
-                <li class="nav-list-item">About</li>
-                <li class="nav-list-item">
-                    <input type="text" placeholder="search..." name="Search">
+                <li class="nav-list-item"><a>Home</a></li>
+                <li class="nav-list-item"><a>About</a></li>
+                <li class="nav-list-item search">
+                    <input type="search" placeholder="Search..." name="search" >
                 </li>
-                <li class="nav-list-item">Contact</li>
-
+                <li class="nav-list-item"><a>Contact</a></li>
             </ul>
         </nav>
     </header>
+    <main>
+        <div class="grid">
+            <div class="grid-list">
+                <p>Project One</p>
+                <button aria-label="click for more">Click for more</button>
+            </div>
+            <div class="grid-list">
+                <p>Project Two</p>
+                <button aria-label="click for more">Click for more</button>
+            </div>
+            <div class="grid-list">
+                <p>Project Three</p>
+                <button aria-label="click for more">Click for more</button>
+            </div>
+            <div class="grid-list">
+                <p>Project Four</p>
+                <button aria-label="click for more">Click for more</button>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

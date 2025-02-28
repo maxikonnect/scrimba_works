@@ -4,8 +4,10 @@
     --green:#2fc02f;
     --blue:#2a2aa5;
     --light-black: rgb(46, 42, 42);
+    --font-size: 1.6rem;
 
     --text-color: var(--light-black);
+    --font-size-small: var(--font-size);
 
 }
 
@@ -26,7 +28,57 @@ html, body{
 a{
     text-decoration: none;
 }
+li{
+    list-style-type: none;
+}
 
+.header{
+    
+    height: 90px;
+    box-shadow: 0 2px 2px 0 rgb(46, 42, 42);
+}
+.navbar{
+    height: 100px;
+    width: 100%;
+}
+
+.navbar .nav-list{
+    height: 100%;
+}
+
+.nav-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-list > li{
+    flex: 1;
+}
+
+.nav-list-item input{
+    --light-black: rgb(120, 120, 120);
+    border: none;
+    border-bottom: 2px solid rgba(82, 82, 82, 0.8);
+    line-height: 24px;
+    padding: 0px 5px;
+    color: rgba(82, 82, 82, 0.8);
+
+}
+
+.nav-list-item input:focus{
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+input::placeholder{
+    color: var(--light-black);
+}
 .header > .navbar > .nav-list > li{
     color: var(--text-color);
+    
+}
+
+.header > .navbar > .nav-list > li a{
+    font-size: var(--font-size-small);
 }
