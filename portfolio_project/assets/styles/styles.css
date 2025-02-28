@@ -1,0 +1,32 @@
+:root{
+    /* Setting Color */
+    --red: #ec3d3d;
+    --green:#2fc02f;
+    --blue:#2a2aa5;
+    --light-black: rgb(46, 42, 42);
+
+    --text-color: var(--light-black);
+
+}
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-size: 62.5%;
+}
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header > .navbar > .nav-list > li{
+    color: var(--text-color);
+}
