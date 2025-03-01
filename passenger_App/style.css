@@ -1,0 +1,70 @@
+:root{
+    --white: #ffffff;
+    --blue: #add8e6;
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", serif;
+}
+
+html, body{
+    font-size: 62.5%;
+    color: var(--white);
+    background: linear-gradient(90deg, lightblue, pink);
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style-type: none;
+}
+
+.container{
+    /*background-image: url("assets/images/passengerPic.jpg"); */
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.container h1{
+    font-size: 4rem;
+    text-shadow: 0 0 5px black;
+}
+
+.counter-screen{
+    font-size: 10rem;
+    margin: 2rem 0;
+    text-shadow: 0 0 5px black;
+}
+
+.btn{
+    display: block;
+    padding: 7px 14px;
+    font-size: 2rem;
+    margin: 0 auto;
+    font-family: "Roboto", serif;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0px 1px 2px 2px rgba(90, 90, 90, 0.3);
+}
+
+.btn:hover{
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.entries{
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px black;
+}
