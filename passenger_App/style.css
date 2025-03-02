@@ -1,6 +1,7 @@
 :root{
     --white: #ffffff;
     --blue: #add8e6;
+    --black: rgb(85, 85, 85);
 
 }
 *{
@@ -11,8 +12,13 @@
 
 html, body{
     font-size: 62.5%;
-    color: var(--white);
-    background: linear-gradient(90deg, lightblue, pink);
+    color: var(--black);
+    background-image: url("assets/images/passenger.jpg"); 
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a{
@@ -24,25 +30,26 @@ li{
 }
 
 .container{
-    /*background-image: url("assets/images/passengerPic.jpg"); */
-    background-size: cover;
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 5px solid lightblue;
     width: 400px;
     height: 400px;
     margin: 0 auto;
-    padding: 30px;
-    margin-top: 70px;
     text-align: center;
+    padding: 10px 20px;
 }
 
 .container h1{
     font-size: 4rem;
-    text-shadow: 0 0 5px black;
+    text-shadow: 0 0 1px black;
+    
 }
 
 .counter-screen{
     font-size: 10rem;
     margin: 2rem 0;
-    text-shadow: 0 0 5px black;
+    text-shadow: 0 0 1px black;
 }
 
 .btn{
@@ -62,9 +69,13 @@ li{
     background-color: var(--blue);
     color: var(--white);
 }
-
+.save-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 .entries{
-    font-size: 1.6rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    text-shadow: 0px 0px 5px black;
+    text-shadow: 0px 0px 1px rgb(110, 110, 110);
 }

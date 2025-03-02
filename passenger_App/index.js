@@ -8,18 +8,20 @@ document.addEventListener('DOMContentLoaded', function(){
     /*INITIALIZE COUNT */
     let count = 0;
 
+
+    /* Increase Count Function */
     function increaseCount(){
         count += 1;
         return count;
     }
 
-    function saveCount(){
-        
-        return counterScreen.textContent;
 
+    /*Save Count Function */
+    function saveCount(){
+        return counterScreen.textContent;
     }
 
-
+    
     increase.addEventListener("click", function(){
         counterScreen.textContent = increaseCount();
     })
