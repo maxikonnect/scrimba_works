@@ -12,7 +12,9 @@ const dataElement = data.map((item) => {
                     <p>${item.song}</p>
                 </div>
                 <div class="card-foot">
-                    <p>...</p>
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
                 </div>
 
             </section>
