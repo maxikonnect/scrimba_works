@@ -8,13 +8,14 @@ fetch("https://api.unsplash.com/photos?client_id=YoNKzUFih_Z_mZDLRY7C5ILiJxWaiCB
                     <div class="card-head">
                         <img src="${entry.urls.regular}" alt="${entry.alt_description}">
                     </div>
-                    <div class="card-mid">
-                        <p>Name: ${entry.user.first_name}</p>
+                    <div class="card-body">
+                        <div class="card-mid">
+                            <p>Name: ${entry.user.first_name}</p>
+                        </div>
+                        <div class="card-foot">
+                            <p>Likes: <span>${entry.likes}</span></p>
+                        </div>
                     </div>
-                    <div class="foot">
-                        <p>Likes: <span>${entry.likes}</span></p>
-                    </div>
-                    <hr />
                 </section>
             
             `
