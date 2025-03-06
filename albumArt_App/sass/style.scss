@@ -223,12 +223,11 @@ a{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    max-width: 900px;
     margin: 0 auto;
     .card{
         display: flex;
         align-items: center;
-        flex: 1 1 400px;
+        flex: 1 1 300px;
         padding: 10px;
         .card-head{
             display: flex;
