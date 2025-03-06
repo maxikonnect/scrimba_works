@@ -1,3 +1,5 @@
+
+/*
 body{
     height: 100vh;
 }
@@ -31,4 +33,55 @@ body{
     grid-template-rows: 150px 200px;
     grid-gap: 10px;
     text-align: center;
+} 
+
+*/
+
+
+body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
+
+.container div:nth-child(1){
+    background-color: green;
+}
+
+.container div:nth-child(2){
+    background-color: tomato;
+}
+
+.container div:nth-child(3){
+    background-color: indigo;
+}
+
+.container div:nth-child(4){
+    background-color: brown;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 100px 300px 100px;
+    text-align: center;
+    grid: 10px;
+}
+
+.header{
+    grid-column: 1 / -1;
+    padding: 40px 0
+}
+
+.menu{
+    grid-column: 1/5;
+}
+
+.content{
+    grid-column: 5/13;
+}
+
+.footer{
+    grid-column: 1/13;
+}
+
