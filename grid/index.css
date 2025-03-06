@@ -61,11 +61,12 @@ body{
 }
 
 .container{
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 100px 300px 100px;
     text-align: center;
-    grid: 10px;
+    grid: 50px;
 }
 
 .header{
