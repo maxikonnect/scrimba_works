@@ -4,16 +4,16 @@ fetch("https://api.unsplash.com/photos?client_id=YoNKzUFih_Z_mZDLRY7C5ILiJxWaiCB
         data.map(entry =>{
             console.log(entry);
             document.querySelector(".container").innerHTML += `
-                <section class="card">
-                    <div class="card-head">
-                        <img src="${entry.urls.regular}" alt="${entry.alt_description}">
+                <section class="card"  tabindex="0">
+                    <div class="card-head" >
+                        <img tabindex="0" src="${entry.urls.regular}" alt="${entry.alt_description}">
                     </div>
                     <div class="card-body">
                         <div class="card-mid">
-                            <p>Name: ${entry.user.first_name}</p>
+                            <p tabindex="0">Name: <span>${entry.user.first_name}</span></p>
                         </div>
                         <div class="card-foot">
-                            <p>Likes: <span>${entry.likes}</span></p>
+                            <p tabindex="0">Likes: <span>${entry.likes}</span></p>
                         </div>
                     </div>
                 </section>
