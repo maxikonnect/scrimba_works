@@ -19,7 +19,7 @@ export default function SearchSingleStudent({ studentsData }) {
         return searchWords.every((word) => studentName.includes(word));
       });
 
-      return retrievedData.length > 0 ? retrievedData : "No data uploaded yet";
+      return retrievedData.length > 0 ? retrievedData : "No Student With that Name";
     } catch (e) {
       return e.message;
     }

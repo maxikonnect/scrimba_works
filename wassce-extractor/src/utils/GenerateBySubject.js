@@ -1,4 +1,6 @@
 import { useState } from "react";
+import jsPDF from 'jspdf'
+import autoTable from "jspdf-autotable";
 
 export default function GenerateBySubject({ studentsData }) {
   const [results, setResults] = useState([]);
@@ -52,6 +54,32 @@ export default function GenerateBySubject({ studentsData }) {
     setSubjectName(enteredSubject);
   }
 
+  function GeneratePDF(studentsData){
+    if(!Array.isArray(studentsData) || studentsData.length === 0){
+      alert("No data is available to process")
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.text(`Search results for students who offer ${subjectName}`, 10, 10);
+
+    const tableColumn = ['Index', 'Name', 'Gender', 'Subjects']
+    const tableRows = []
+
+    studentsData.forEach((student) =>{
+      const subjects = Object.entries(student.Subjects)
+      .map(([subject, value]) => `${subject} : ${value}`)
+      .join(", ")
+      tableRows.push([student.Index, student.Name, student.Gender, subjects])
+    })
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    })
+    doc.save(`${subjectName}'s Students`);
+
+  }
   return (
     <div>
       <form onSubmit={HandleSubmit}>
@@ -65,8 +93,9 @@ export default function GenerateBySubject({ studentsData }) {
         />
         <button type="submit">Submit</button>
       </form>
-
+      
       {results.length > 0 ? (
+      <>
         <table>
             <caption>Students Taking {results[0].matchedSubject}: {results.length} Students</caption>
           <thead>
@@ -96,6 +125,8 @@ export default function GenerateBySubject({ studentsData }) {
             ))}
           </tbody>
         </table>
+        <button onClick={()=>GeneratePDF(results)}>Download PDF</button>
+      </>
       ) : subjectName ? (
         <p>No students found for "{subjectName}".</p>
       ) : null}

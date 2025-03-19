@@ -1,4 +1,6 @@
 import { useState } from "react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function GenerateOnlySubject({ studentsData }) {
   const [results, setResults] = useState([]);
@@ -26,8 +28,8 @@ export default function GenerateOnlySubject({ studentsData }) {
           if (matchedSubject) {
             return {
               ...student,
-              matchedSubject: matchedSubject, // Store the exact matched subject name
-              grade: student.Subjects[matchedSubject], // Get the correct grade
+              matchedSubject: matchedSubject, // ✅ Store the matched subject name
+              grade: student.Subjects[matchedSubject], // ✅ Store the correct grade
             };
           }
 
@@ -52,6 +54,37 @@ export default function GenerateOnlySubject({ studentsData }) {
     setSubjectName(enteredSubject);
   }
 
+  function GeneratePDF(studentsData, subjectName) {
+    if (!Array.isArray(studentsData) || studentsData.length === 0) {
+      alert("No data has been uploaded");
+      return;
+    }
+
+    let doc = new jsPDF();
+    doc.setFontSize(20)
+    doc.text(`${subjectName} WASSCE Results`, 10, 10);
+
+    const tableColumn = ["Index", "Name", "Gender", "Grade"];
+    const tableRows = [];
+
+    studentsData.forEach((student) => {
+      tableRows.push([
+        student.Index,
+        student.Name,
+        student.Gender,
+        student.grade || "Not Available", 
+      ]);
+    });
+
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    });
+
+    doc.save(`${subjectName}_Search_Results.pdf`);
+  }
+
   return (
     <div>
       <form onSubmit={HandleSubmit}>
@@ -67,31 +100,34 @@ export default function GenerateOnlySubject({ studentsData }) {
       </form>
 
       {results.length > 0 ? (
-        <table>
-          <caption>
-            Students Taking {results[0].matchedSubject}: {results.length} Students
-          </caption>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Index</th>
-              <th>Gender</th>
-              <th>{results[0].matchedSubject} Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((student, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{student.Name}</td>
-                <td>{student.Index}</td>
-                <td>{student.Gender}</td>
-                <td>{student.grade || "Not Available"}</td>
+        <>
+          <table>
+            <caption>
+              Students Taking {results[0].matchedSubject}: {results.length} Students
+            </caption>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Index</th>
+                <th>Gender</th>
+                <th>{results[0].matchedSubject} Grade</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {results.map((student, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{student.Name}</td>
+                  <td>{student.Index}</td>
+                  <td>{student.Gender}</td>
+                  <td>{student.grade || "Not Available"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button onClick={() => GeneratePDF(results, subjectName)}>Download PDF</button>
+        </>
       ) : subjectName ? (
         <p>No students found for "{subjectName}".</p>
       ) : null}
