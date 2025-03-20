@@ -3,8 +3,9 @@ import { CountGrade } from "./gradeAnalysis";
 
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
+  const [showTable, setShowTable] = useState(false); // State for toggling table
 
-  function HandleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     if (!Array.isArray(studentsData) || studentsData.length === 0) {
       alert("No data uploaded");
@@ -18,31 +19,28 @@ export default function GenerateTable({ studentsData }) {
     const groupSubjects = subjects.map((subject, index) => CountGrade(studentsData, `${index + 1}`, subject));
 
     setResults(groupSubjects);
+    setShowTable(!showTable); // ✅ Toggle table visibility
   }
 
-  console.log(results);
   return (
     <>
       <div>
-        <form onSubmit={HandleSubmit}>
-          <button type="submit" name="submit">Generate Full detailed Results</button>
+        <form onSubmit={handleSubmit}>
+          <button type="submit" className="btn">
+            {showTable ? "Hide Detailed Results Table" : "Generate Full Detailed Results"}
+          </button>
         </form>
       </div>
 
-      <div>
-        {results && results.map((sub) => sub.subject + "  ||  ")}
-      </div>
-
-      <div>
-        {results && (
+      {showTable && results && (
+        <div>
           <table className="table">
             <caption>WASSCE Results Analysis</caption>
             <thead>
               <tr>
                 <th>Subject</th>
-                <th colspans="8"></th>
+                <th colSpan="8"></th>
                 <th colSpan="18">Grades</th>
-                
               </tr>
               <tr>
                 <td></td>
@@ -59,8 +57,6 @@ export default function GenerateTable({ studentsData }) {
                 <td colSpan="2">D7</td>
                 <td colSpan="2">E8</td>
                 <td colSpan="2">F9</td>
-                <td></td>
-                <td></td>
               </tr>
               <tr>
                 <td></td>
@@ -90,53 +86,40 @@ export default function GenerateTable({ studentsData }) {
                 <td>F</td>
                 <td>M</td>
                 <td>F</td>
-                
-                <td></td>
-                <td></td>
               </tr>
             </thead>
             <tbody>
               {results.map((subjectData) => (
                 <tr key={subjectData.subject}>
-                  
                   <td>{subjectData.subject}</td>
                   <td>{subjectData.totalStudents.Male}</td>
                   <td>{subjectData.totalStudents.Female}</td>
                   {subjectData.grade
                     .filter((studentGrade) => !studentGrade.resultsCame)
-                    .map((getGrade, index) => {
-                      
-                      return (
-                    <>
+                    .map((getGrade) => (
+                      <>
                         <td>{getGrade.male}</td>
                         <td>{getGrade.female}</td>
-                        {/*<td>{total === 0 ? "-" : total}</td>*/}
-                          
-                    </>
-                      )
-                    })}
-                  
+                      </>
+                    ))}
                   {subjectData.grade
                     .filter((studentGrade) => studentGrade.resultsCame)
-                    .map((getGrade, index) => {
-                      const total = getGrade.male + getGrade.female;
-                      return (
-                    <>
-                        
+                    .map((getGrade) => (
+                      <>
                         <td>{getGrade.male}</td>
                         <td>{getGrade.female}</td>
-                        {/*<td>{total === 0 ? "-" : total}</td>*/}
-                          
-                    </>
-                      )
-                    })}
-                  
+                      </>
+                    ))}
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
-      </div>
+          <div style={{borderBottom: "1px solid blue"}}>
+
+          </div>
+        </div>
+        
+      )}
     </>
   );
 }

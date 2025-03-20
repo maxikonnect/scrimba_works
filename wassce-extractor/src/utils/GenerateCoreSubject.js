@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { CountGrade } from "./gradeAnalysis";
 
+
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
+  const [showTable, setShowTable] = useState(false);
 
   function HandleSubmit(event) {
     event.preventDefault();
@@ -35,6 +37,7 @@ export default function GenerateTable({ studentsData }) {
     );
 
     setResults(groupSubjects);
+    setShowTable(!showTable);
     console.log(groupSubjects)
   }
 
@@ -42,18 +45,12 @@ export default function GenerateTable({ studentsData }) {
     <>
       <div>
         <form onSubmit={HandleSubmit}>
-          <button type="submit">Generate Only Core Subjects</button>
+          <button type="submit" className="btn">
+            {showTable ? "Hide Core Subjects Table" : "Generate Only Core Subjects"}</button>
         </form>
       </div>
-
-      {/* Display Subjects */}
       <div>
-        {results && results.map((sub) => <span key={sub.subject}>{sub.subject} || </span>)}
-      </div>
-
-      {/* Table Output */}
-      <div>
-        {results && results.length > 0 ? (
+        {showTable && results && results.length > 0 ? (
           <table className="table">
             <caption>CORE SUBJECTS PERCENTAGE PASSES</caption>
             <thead>
@@ -137,7 +134,7 @@ export default function GenerateTable({ studentsData }) {
             </tfoot>
           </table>
         ) : (
-          <p>No results available.</p>
+          <p></p>
         )}
       </div>
     </>

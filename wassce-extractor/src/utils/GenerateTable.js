@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { CountGrade } from "./gradeAnalysis";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
+  const [showTable, setShowTable] = useState(false);
 
   function HandleSubmit(event) {
     event.preventDefault();
@@ -15,26 +18,69 @@ export default function GenerateTable({ studentsData }) {
     const subjectNames = [...new Set(subjectElements.flatMap((subjects) => Object.keys(subjects)))];
     const subjects = subjectNames.filter((subject) => /[a-zA-Z]/.test(subject));
     
-    console.log(subjects);
     const groupSubjects = subjects.map((subject, index) => CountGrade(studentsData, `${index + 1}`, subject));
 
     setResults(groupSubjects);
+    setShowTable(!showTable);
+  }
+
+  function GeneratePDF() {
+    if (!results || results.length === 0) {
+      alert("No data available to generate PDF");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.text("WASSCE Results Analysis", 10, 10);
+
+    const tableColumn = [
+      "Subject", "A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9", "Pass %", "Total Candidates"
+    ];
+    const tableRows = [];
+
+    results.forEach((subjectData) => {
+      const rowData = [
+        subjectData.subject,
+        ...subjectData.grade
+          .filter((studentGrade) => studentGrade.resultsCame)
+          .map((getGrade) => getGrade.male + getGrade.female || "-"),
+        (
+          (subjectData.grade
+            .filter((studentGrade) => studentGrade.hasPassed)
+            .reduce((total, acc) => total + acc.male + acc.female, 0) /
+            subjectData.grade
+              .filter((studentGrade) => studentGrade.resultsCame)
+              .reduce((total, acc) => total + acc.male + acc.female, 0)) *
+          100
+        ).toFixed(2),
+        subjectData.grade
+          .filter((studentGrade) => studentGrade.resultsCame)
+          .reduce((total, acc) => total + acc.male + acc.female, 0),
+      ];
+      tableRows.push(rowData);
+    });
+
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    });
+
+    doc.save("WASSCE_Results_Analysis.pdf");
   }
 
   return (
-    <>
+    <div>
       <div>
         <form onSubmit={HandleSubmit}>
-          <button type="submit" name="submit">Generate Results Summary</button>
+          <button type="submit" className="btn">
+            {showTable ? "Hide Summary Results Table" : "Generate Results Summary"}
+          </button>
         </form>
       </div>
 
-      <div>
-        {results && results.map((sub) => sub.subject + "  ||  ")}
-      </div>
-
-      <div>
-        {results && (
+      {showTable && results && (
+        <>
           <table className="table">
             <caption>WASSCE Results Analysis</caption>
             <thead>
@@ -69,7 +115,6 @@ export default function GenerateTable({ studentsData }) {
                       const total = getGrade.male + getGrade.female;
                       return <td key={index}>{total === 0 ? "-" : total}</td>;
                     })}
-
                   <td>
                     {(
                       (subjectData.grade
@@ -81,7 +126,6 @@ export default function GenerateTable({ studentsData }) {
                       100
                     ).toFixed(2)}
                   </td>
-
                   <td>
                     {subjectData.grade
                       .filter((studentGrade) => studentGrade.resultsCame)
@@ -91,8 +135,12 @@ export default function GenerateTable({ studentsData }) {
               ))}
             </tbody>
           </table>
-        )}
-      </div>
-    </>
+
+          <button onClick={GeneratePDF} className="btn">
+            Download PDF
+          </button>
+        </>
+      )}
+    </div>
   );
 }

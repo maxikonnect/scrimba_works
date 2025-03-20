@@ -81,17 +81,20 @@ export default function GenerateBySubject({ studentsData }) {
 
   }
   return (
-    <div>
+    <div className="result-checker">
       <form onSubmit={HandleSubmit}>
-        <label htmlFor="subjectName">Enter Subject Name:</label>
-        <input
-          id="subjectName"
-          name="subjectName"
-          type="text"
-          placeholder="Physics, Chemistry, French..."
-          required
-        />
-        <button type="submit">Submit</button>
+        <h3>SEARCH FOR STUDENTS WHO TAKE A PARTICULAR SUBJECT</h3>
+        <div className="form-container">
+          <label htmlFor="subjectName">Enter Subject Name:</label>
+          <input
+            id="subjectName"
+            name="subjectName"
+            type="text"
+            placeholder="Physics, Chemistry, French..."
+            required
+          />
+          <button type="submit" className="small-btn">Submit</button>
+        </div>
       </form>
       
       {results.length > 0 ? (
@@ -125,10 +128,10 @@ export default function GenerateBySubject({ studentsData }) {
             ))}
           </tbody>
         </table>
-        <button onClick={()=>GeneratePDF(results)}>Download PDF</button>
+        <button className='medium-btn' onClick={()=>GeneratePDF(results)}>Download PDF</button>
       </>
       ) : subjectName ? (
-        <p>No students found for "{subjectName}".</p>
+        <p>No Subject with name "{subjectName}".</p>
       ) : null}
     </div>
   );

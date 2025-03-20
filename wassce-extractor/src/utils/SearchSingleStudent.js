@@ -70,13 +70,19 @@ export default function SearchSingleStudent({ studentsData }) {
   }
 
   return (
-    <div>
+    <div className="result-checker">
+      <header>
+        <hr />
+        <h3>ENTER STUDENT'S NAME TO SEARCH</h3>
+      </header>
       <form onSubmit={HandleSearch}>
-        <label htmlFor="name">
-          Enter Student's Name to check GRADE
-          <input type="text" id="name" name="name" placeholder="Michael, Cindy, Adwoa" required />
-        </label>
-        <button type="submit">Submit</button>
+          <div className="form-container">
+            <label htmlFor="name">
+              Enter Student's Name
+              <input type="text" id="name" name="name" placeholder="Michael, Cindy, Adwoa" required />
+            </label>
+            <button type="submit" className="small-btn">Submit</button>
+          </div>
       </form>
 
       {Array.isArray(results) ? (
@@ -108,7 +114,7 @@ export default function SearchSingleStudent({ studentsData }) {
               ))}
             </tbody>
           </table>
-          <button onClick={() => generatePDF(results)}>Download PDF</button>
+          <button className="medium-btn" onClick={() => generatePDF(results)}>Download PDF</button>
         </>
       ) : results ? (
         <p>{results}</p>
