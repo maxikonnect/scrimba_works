@@ -70,8 +70,8 @@ export default function GenerateTable({ studentsData }) {
   }
 
   return (
-    <div>
-      <div>
+    <div className="generateTable">
+      <div className="generateForm">
         <form onSubmit={HandleSubmit}>
           <button type="submit" className="btn">
             {showTable ? "Hide Summary Results Table" : "Generate Results Summary"}
@@ -80,7 +80,7 @@ export default function GenerateTable({ studentsData }) {
       </div>
 
       {showTable && results && (
-        <>
+        <div className="table-container">
           <table className="table">
             <caption>WASSCE Results Analysis</caption>
             <thead>
@@ -136,10 +136,10 @@ export default function GenerateTable({ studentsData }) {
             </tbody>
           </table>
 
-          <button onClick={GeneratePDF} className="btn">
+          <button onClick={GeneratePDF} className="small-btn">
             Download PDF
           </button>
-        </>
+        </div>
       )}
     </div>
   );

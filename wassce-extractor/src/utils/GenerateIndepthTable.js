@@ -95,7 +95,7 @@ export default function GenerateTable({ studentsData }) {
       </div>
 
       {showTable && results && (
-        <div>
+        <div className="table-container" style={{overflowX: "auto"}}>
           <table className="table">
             <caption>WASSCE Results Analysis</caption>
             <thead>

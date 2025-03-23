@@ -8,16 +8,19 @@ import GenerateOnlySubject from "../utils/GenerateOnlySubject";
 import GenerateTable from "../utils/GenerateTable";
 import GenerateIndepthTable from "../utils/GenerateIndepthTable";
 import GenerateCoreSubject from "../utils/GenerateCoreSubject";
-import '../styles/reset.css'
+import '../styles/reset.css';
+import Navbar from '../components/Navbar';
 
 export default function Home() {  
   const [studentsData, setStudentsData] = useState([]);
   const [showText, setShowText] = useState(false);
 
-  console.log(studentsData);
+
   return (
     <>
-
+      <header>
+        <Navbar />
+      </header>
       <main className="container">
         <div className="sub-container">
             
@@ -29,7 +32,7 @@ export default function Home() {
                     For schools with one pdf upload only one.
                     upload <strong>two Pdf's</strong> if you have two PDF's
                 </p>}
-                <button className="btn" onClick={()=>setShowText(!showText)}>
+                <button  onClick={()=>setShowText(!showText)}>
                   {showText ? "Click To Hide Hint" :  "Click To Read Hint"}
                 </button>
             </div>
@@ -47,25 +50,15 @@ export default function Home() {
       
 
             {/* Rendering Components Instead of Routes */}
+          
+              <GenerateTable studentsData={studentsData} />
+              <GenerateIndepthTable studentsData={studentsData} />
+              <GenerateCoreSubject studentsData={studentsData} />
             <div className="detailedResults">
-                <div className="generateresults">
-                    <GenerateTable studentsData={studentsData} />
-                </div>
-                <div className="generateresults">
-                    <GenerateIndepthTable studentsData={studentsData} />
-                </div>
-                <div className="generateresults">
-                    <GenerateCoreSubject studentsData={studentsData} />
-                </div>
-                
-               
-                
-            </div>
-            <div className="detailedResults">
-                <SpecificGradeMultipleTimes studentsData={studentsData} />
-                <SearchSingleStudent studentsData={studentsData} />
-                <GenerateBySubject studentsData={studentsData} />
-                <GenerateOnlySubject studentsData={studentsData} />
+              <SpecificGradeMultipleTimes studentsData={studentsData} />
+              <SearchSingleStudent studentsData={studentsData} />
+              <GenerateBySubject studentsData={studentsData} />
+              <GenerateOnlySubject studentsData={studentsData} />
             </div>
         </div>
       </main>

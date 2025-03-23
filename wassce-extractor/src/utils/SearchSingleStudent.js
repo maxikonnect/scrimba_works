@@ -78,7 +78,7 @@ export default function SearchSingleStudent({ studentsData }) {
       <form onSubmit={HandleSearch}>
           <div className="form-container">
             <label htmlFor="name">
-              Enter Student's Name
+              Enter Student's Name:
               <input type="text" id="name" name="name" placeholder="Michael, Cindy, Adwoa" required />
             </label>
             <button type="submit" className="small-btn">Submit</button>

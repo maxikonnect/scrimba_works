@@ -1,0 +1,316 @@
+
+/*
+.container{
+    width: 90%;
+    max-width: 960px;
+    margin: 40px auto;
+}
+
+.sub-container{
+    margin-bottom: 3em;
+}
+ 
+.uploader{
+    padding: 4rem;
+}
+
+.uploadContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid var(--color-red);
+    padding: var(--header-padding);
+    margin-bottom: 2em;
+}
+
+.uploadContainer h3{
+    font-size: var(--font-size-medium);
+    margin-bottom: .4em;
+}
+
+.upload-container {
+    text-align: center;
+    padding: 10px;
+}
+ 
+.custom-file-upload{
+    display: inline-block;
+    padding: .6em;
+    outline: 1px solid var(--color-green);
+    font-size: var(--font-size-small);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover{
+    color: var(--color-white);
+    background-color: var(--color-green);
+}
+.custom-file-upload input {
+    display: none
+}
+.fileName{
+    margin-top: .7em;
+    font-size: 1rem;
+}
+  
+
+.sub-container{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.hideShowContainer{
+    text-align: center;
+    margin: var(--section-margin-bottom);
+}
+.containerHeader{
+    text-align: center;
+    
+}
+
+
+.uploadContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid var(--color-red);
+    padding: var(--header-padding);
+}
+
+
+.detailedResults{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.setBorder{
+    border-bottom: 5px solid var(--color-red);
+    margin-bottom: 2em;
+}
+
+.result-checker{
+    margin: 4em 0;
+    margin-bottom: 4em;
+    border: 1px solid var(--color-red);
+    padding: 2em;
+    text-align: center;
+}
+
+.result-checker header{
+    margin: 2em 0;
+}
+
+.result-checker h3{
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold)
+}
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+input[type="text"],
+input[type="number"]{
+    border: 1px solid #333;
+    width: 150px;
+    padding: .6em;
+    font-size: 1.2rem;
+    font-size: var(--font-size-medium);
+    margin: 0 .6em;
+}
+
+label{
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    
+}
+
+
+
+
+.small-btn{
+    padding: var(--button-padding);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-red);
+    color: var(--color-white);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: var(--transition-effect);
+    width: 100px;
+}
+
+.medium-btn{
+    padding: var(--button-padding);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-red);
+    color: var(--color-white);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: var(--transition-effect);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 160px;
+}
+.btn{
+    padding: var(--button-padding);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-red);
+    color: var(--color-white);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: var(--transition-effect);
+    margin-top: 10px;
+    width: 280px;
+}
+
+.btn:hover{
+    outline: 1px solid var(--color-red);
+    background-color: white;
+    color: var(--color-red);
+    
+}
+
+.btn:active{
+    opacity: .5;
+    background-color:var(--color-red);
+    color: var(--color-white);
+}
+.footer{
+    bottom: 0;
+    left: 0;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    width: 100%;
+    margin-top: 3em;
+    padding: 3em 0;
+
+}
+.footer p{
+    color: var(--color-white);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+
+
+@media screen and (max-width: 500px){
+    .uploader{
+        padding: 20px;
+    }
+    
+    .uploadContainer{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        border: 1px solid var(--color-red);
+        padding: var(--header-padding);
+    }
+    
+    .uploadContainer h3{
+        font-size: var(--font-size-medium);
+        margin-bottom: .4em;
+    }
+    .upload-sub{
+        margin: 1rem 0;
+    }
+
+
+  
+    .small-btn{
+        padding: var(--button-padding);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        background-color: var(--color-red);
+        color: var(--color-white);
+        cursor: pointer;
+        border-radius: 5px;
+        transition: var(--transition-effect);
+        width: 100px;
+    }
+    
+    .medium-btn{
+        padding: var(--button-padding);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        background-color: var(--color-red);
+        color: var(--color-white);
+        cursor: pointer;
+        border-radius: 5px;
+        transition: var(--transition-effect);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100px;
+    }
+    .btn{
+        padding: var(--button-padding);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        background-color: var(--color-red);
+        color: var(--color-white);
+        cursor: pointer;
+        border-radius: 5px;
+        transition: var(--transition-effect);
+        margin-top: 10px;
+        width: 150px;
+    }
+    
+}
+
+
+
+table{
+    border: .3px solid var(--color-blue);
+    margin: 0;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+.core-table{
+    max-width: 1200px;
+    width: 90%;
+}
+
+th, td{
+    border: 1px solid var(--color-blue);
+    font-size: var(--font-size-small);
+}
+th{
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    padding: 1em;
+    margin: 0;
+}
+
+caption{
+    font-size: var(--font-size-medium);
+    margin: 1em 0;
+}
+td{
+    padding: .5em;
+    font-size: var(--font-size-medium);
+}
+
+
+.error-message,
+.hideAndShow{
+    font-size:var(--font-size-small);
+    margin-top: 1em;
+}
