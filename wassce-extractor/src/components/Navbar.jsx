@@ -5,10 +5,9 @@ export default function Navbar(){
     return(
         <header className='header'>
             <nav className="navList">
-                <img src={logo} alt="Wassce Analyser logo" />
+                <img src={logo} className="logo" alt="Wassce Analyser logo" />
                 <ul className='navList-item'>
                     <NavLink className="logoName" to="/">WASSCE ANALYSER</NavLink>
-                    <NavLink to="/about">About</NavLink>
                 </ul>
             </nav>
         </header>

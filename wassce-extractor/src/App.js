@@ -1,16 +1,40 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About"; 
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-export default function App() {  
+import Login from "./components/login";
+import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { auth } from "./components/firebase";
+
+function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return () => unsubscribe(); // Cleanup function to avoid memory leaks
+  }, []);
+
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </>
+    <Router>
+      <div className="App">
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Routes>
+              <Route path="/" element={user ? <Navigate to="/home" /> : <Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/home" element={user ? <Home /> : <Navigate to="/login" />} />
+            </Routes>
+            <ToastContainer />
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
+
+export default App;

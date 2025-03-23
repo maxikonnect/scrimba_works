@@ -88,7 +88,10 @@ export default function SearchSingleStudent({ studentsData }) {
       {Array.isArray(results) ? (
         <>
           <table>
-            <caption>Searched Results containing "{name}"</caption>
+            <caption>Searched Results containing "{name}". Returned {" "}
+              {results.length > 0 ? results.length : " no "}
+              {results.length > 1 ? " results" : " result"}
+            </caption>
             <thead>
               <tr>
                 <th>#</th>

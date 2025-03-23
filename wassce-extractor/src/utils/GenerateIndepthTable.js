@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { CountGrade } from "./gradeAnalysis";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable"
 
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
@@ -12,6 +14,7 @@ export default function GenerateTable({ studentsData }) {
       return;
     }
 
+
     const subjectElements = studentsData.map((data) => data["Subjects"]);
     const subjectNames = [...new Set(subjectElements.flatMap((subjects) => Object.keys(subjects)))];
     const subjects = subjectNames.filter((subject) => /[a-zA-Z]/.test(subject));
@@ -21,6 +24,65 @@ export default function GenerateTable({ studentsData }) {
     setResults(groupSubjects);
     setShowTable(!showTable); // ✅ Toggle table visibility
   }
+  console.log(results);
+  function GeneratePdf(resultsData) {
+    if (!Array.isArray(resultsData) || resultsData.length === 0) {
+      alert("No data available for export");
+      return;
+    }
+  
+    // Create PDF in landscape mode
+    const doc = new jsPDF({ orientation: "landscape" });
+  
+    doc.text("Students In-Depth Analysis", 14, 10);
+  
+    const tableColumn = [
+      "Subject",
+      "Total Male",
+      "Total Female",
+      "A1(M)",
+      "A1(F)",
+      "B2(M)",
+      "B2(F)",
+      "B3(M)",
+      "B3(F)",
+      "C4(M)",
+      "C4(F)",
+      "C5(M)",
+      "C5(F)",
+      "C6(M)",
+      "C6(F)",
+      "D7(M)",
+      "D7(F)",
+      "E8(M)",
+      "E8(F)",
+      "F9(M)",
+      "F9(F)",
+    ];
+  
+    const tableRows = resultsData.map((subjectData) => {
+      const gradesData = subjectData.grade
+        .filter((studentGrade) => studentGrade.resultsCame)
+        .flatMap((getGrade) => [getGrade.male, getGrade.female]);
+  
+      return [subjectData.subject, subjectData.totalStudents.Male, subjectData.totalStudents.Female, ...gradesData];
+    });
+  
+    autoTable(doc, {
+      startY: 20,
+      head: [tableColumn],
+      body: tableRows,
+      theme: "grid",
+      styles: { fontSize: 8, cellWidth: "auto" }, 
+      headStyles: { fillColor: [0, 128, 255] },
+      alternateRowStyles: { fillColor: [240, 240, 240] },          
+      margin: { top: 15, left: 10, right: 10 }, 
+      tableWidth: "auto", 
+    });
+  
+    doc.save("in-depth_analysis.pdf");
+  }
+  
 
   return (
     <>
@@ -114,7 +176,8 @@ export default function GenerateTable({ studentsData }) {
               ))}
             </tbody>
           </table>
-          <div style={{borderBottom: "1px solid blue"}}>
+          <button className="medium-btn" onClick={() => GeneratePdf(results)}>Download PDF</button>
+          <div>
 
           </div>
         </div>

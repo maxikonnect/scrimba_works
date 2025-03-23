@@ -9,8 +9,12 @@ const SpecificGradeMultipleTimes = ({ studentsData }) => {
   const [numberOfTimes, setNumberOfTimes] = useState("");
 
   function Search(event) {
-    event.preventDefault(); // Prevent page refresh
- 
+    event.preventDefault(); 
+
+    if(!Array.isArray(studentsData) || studentsData.length === 0){
+      alert("No Data uploaded. Kindly upload");
+      return;
+    }
     const formData = new FormData(event.target);
     const grade = formData.get("countGrade").toUpperCase().trim();
     const times = formData.get("numberOfTimes").trim();
@@ -114,7 +118,7 @@ const SpecificGradeMultipleTimes = ({ studentsData }) => {
                 ))}
               </tbody>
             </table>
-            <button onClick={() => GeneratePDF(results)}>Download PDF</button>
+            <button className="medium-btn" onClick={() => GeneratePDF(results)}>Download PDF</button>
         </>
       ) : results ? (
         <p>{results}</p>

@@ -14,18 +14,20 @@ export default function Home() {
   const [studentsData, setStudentsData] = useState([]);
   const [showText, setShowText] = useState(false);
 
+  console.log(studentsData);
   return (
     <>
 
       <main className="container">
         <div className="sub-container">
+            
             <h1 className="containerHeader">
               Upload PDFs to Extract Student Data
             </h1>
             <div className="hideShowContainer">
                 {showText && <p className="hideAndShow">
                     For schools with one pdf upload only one.
-                    upload <strong>two Pdf</strong> if you have two PDF's
+                    upload <strong>two Pdf's</strong> if you have two PDF's
                 </p>}
                 <button className="btn" onClick={()=>setShowText(!showText)}>
                   {showText ? "Click To Hide Hint" :  "Click To Read Hint"}
@@ -46,9 +48,18 @@ export default function Home() {
 
             {/* Rendering Components Instead of Routes */}
             <div className="detailedResults">
-                <GenerateTable studentsData={studentsData} />
-                <GenerateIndepthTable studentsData={studentsData} />
-                <GenerateCoreSubject studentsData={studentsData} />
+                <div className="generateresults">
+                    <GenerateTable studentsData={studentsData} />
+                </div>
+                <div className="generateresults">
+                    <GenerateIndepthTable studentsData={studentsData} />
+                </div>
+                <div className="generateresults">
+                    <GenerateCoreSubject studentsData={studentsData} />
+                </div>
+                
+               
+                
             </div>
             <div className="detailedResults">
                 <SpecificGradeMultipleTimes studentsData={studentsData} />

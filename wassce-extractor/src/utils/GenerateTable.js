@@ -113,7 +113,7 @@ export default function GenerateTable({ studentsData }) {
                     .filter((studentGrade) => studentGrade.resultsCame)
                     .map((getGrade, index) => {
                       const total = getGrade.male + getGrade.female;
-                      return <td key={index}>{total === 0 ? "-" : total}</td>;
+                      return <td key={index}>{total === 0 ? 0 : total}</td>;
                     })}
                   <td>
                     {(
