@@ -10,11 +10,13 @@ import GenerateIndepthTable from "../utils/GenerateIndepthTable";
 import GenerateCoreSubject from "../utils/GenerateCoreSubject";
 import '../styles/reset.css';
 import Navbar from '../components/Navbar';
+import Subjects from '../components/subjects';
 
 export default function Home() {  
   const [studentsData, setStudentsData] = useState([]);
   const [showText, setShowText] = useState(false);
 
+ 
 
   return (
     <>
@@ -50,13 +52,16 @@ export default function Home() {
       
 
             {/* Rendering Components Instead of Routes */}
-          
+              
               <GenerateTable studentsData={studentsData} />
               <GenerateIndepthTable studentsData={studentsData} />
               <GenerateCoreSubject studentsData={studentsData} />
             <div className="detailedResults">
               <SpecificGradeMultipleTimes studentsData={studentsData} />
               <SearchSingleStudent studentsData={studentsData} />
+              
+              <Subjects studentsData={studentsData}/>
+              <hr style={{borderBottom: "1px solid #0074a7;"}}/>
               <GenerateBySubject studentsData={studentsData} />
               <GenerateOnlySubject studentsData={studentsData} />
             </div>

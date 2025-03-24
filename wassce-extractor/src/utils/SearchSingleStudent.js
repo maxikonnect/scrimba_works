@@ -72,16 +72,19 @@ export default function SearchSingleStudent({ studentsData }) {
   return (
     <div className="result-checker">
       <header>
-        <hr />
         <h3>ENTER STUDENT'S NAME TO SEARCH</h3>
       </header>
       <form onSubmit={HandleSearch}>
           <div className="form-container">
-            <label htmlFor="name">
-              Enter Student's Name:
+            <div className="search-contain">
+              <label htmlFor="name">
+                Student's Name:
+                </label>
               <input type="text" id="name" name="name" placeholder="Michael, Cindy, Adwoa" required />
-            </label>
-            <button type="submit" className="small-btn">Submit</button>
+            </div>
+            <div className="search-contain">
+              <button type="submit" className="small-btn">Submit</button>
+            </div>
           </div>
       </form>
 

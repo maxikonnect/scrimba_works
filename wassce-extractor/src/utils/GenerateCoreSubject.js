@@ -3,19 +3,7 @@ import { CountGrade } from "./gradeAnalysis";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
 import React from 'react';
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Title,
-  Tooltip,
-  Legend
-} from "chart.js";
 
-// Register necessary components
-ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 
 export default function GenerateTable({ studentsData }) {
@@ -147,138 +135,142 @@ export default function GenerateTable({ studentsData }) {
   
   return (
     <>
-      <div>
-        <form onSubmit={HandleSubmit}>
-          <button type="submit" className="btn">
-            {showTable ? "Hide Core Subjects Table" : "Generate Only Core Subjects"}</button>
-        </form>
-      </div>
-      <div>
-        {showTable && results && results.length > 0 ? (
-          <table className="core-table">
-            <caption>CORE SUBJECTS PERCENTAGE PASSES</caption>
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th>A1</th>
-                <th>%Pass</th>
-                <th>B2</th>
-                <th>%Pass</th>
-                <th>B3</th>
-                <th>%Pass</th>
-                <th>C4</th>
-                <th>%Pass</th>
-                <th>C5</th>
-                <th>%Pass</th>
-                <th>C6</th>
-                <th>%Pass</th>
-                <th>D7</th>
-                <th>%Pass</th>
-                <th>E8</th>
-                <th>%Pass</th>
-                <th>F9</th>
-                <th>%Fail</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((subjectData, index) => {
+      <div className="generateTable">
+        <div>
+          <form onSubmit={HandleSubmit}>
+            <button type="submit" className="generatebtn">
+              {showTable ? "Hide Core Subjects Table" : "Generate Only Core Subjects"}</button>
+          </form>
+        </div>
+        <div>
+          {showTable && results && results.length > 0 ? (
+            <div className="table-container" style={{overflowX: "auto"}}>
+            <table className="core-table">
+              <caption>CORE SUBJECTS PERCENTAGE PASSES</caption>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>A1</th>
+                  <th>%Pass</th>
+                  <th>B2</th>
+                  <th>%Pass</th>
+                  <th>B3</th>
+                  <th>%Pass</th>
+                  <th>C4</th>
+                  <th>%Pass</th>
+                  <th>C5</th>
+                  <th>%Pass</th>
+                  <th>C6</th>
+                  <th>%Pass</th>
+                  <th>D7</th>
+                  <th>%Pass</th>
+                  <th>E8</th>
+                  <th>%Pass</th>
+                  <th>F9</th>
+                  <th>%Fail</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((subjectData, index) => {
+                  
                 
-
-                // Calculate the total number of students whose results came
-                const totalResultsCame = subjectData.grade
-                  .filter((grade) => grade.resultsCame === true)
-                  .reduce((sum, grade) => sum + grade.male + grade.female, 0);
-                return (
-                    <>
-                    <tr key={index}>
-                      <td>{subjectData.subject}</td>
-                      {subjectData.grade
-                        .filter((grade) => grade.resultsCame === true)
+                  // Calculate the total number of students whose results came
+                  const totalResultsCame = subjectData.grade
+                    .filter((grade) => grade.resultsCame === true)
+                    .reduce((sum, grade) => sum + grade.male + grade.female, 0);
+                  return (
+                      <>
+                      <tr key={index}>
+                        <td>{subjectData.subject}</td>
+                        {subjectData.grade
+                          .filter((grade) => grade.resultsCame === true)
+                          .map((grade, idx) => {
+                            const total = grade.male + grade.female;
+                            return(
+                                <>
+                                    <td key={idx}>{total || "0"}</td>
+                                    <td>{((total / totalResultsCame) * 100).toFixed(2)}</td>
+                                </>
+                            )
+                          })}
+                        
+                      </tr>
+                      <tr>
+                        
+                      </tr>
+                  </>
+                  );
+                })}
+              </tbody>
+            </table>
+            </div>
+          ) : (
+            <p></p>
+          )}
+        </div>
+        <div>
+          
+          {showTable && results && results.length > 0 ? (
+            <>
+            <table className="core-table">
+              <caption>CORE SUBJECTS PERCENTAGE PASSES</caption>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Total Candidates Registered</th>
+                  <th>Overall % Pass</th>
+                  <th>Candidates with Results</th>
+                  <th>Total Cancelled</th>
+                  <th>Total Absent</th>
+                  <th>Results Held</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((subjectData, index) => {
+                  const totalRegistered = subjectData.totalStudents?.Total || 0;
+                
+                  // Calculate the total number of students whose results came
+                  const totalResultsCame = subjectData.grade
+                    .filter((grade) => grade.resultsCame === true)
+                    .reduce((sum, grade) => sum + grade.male + grade.female, 0);
+                  const StuPassed = subjectData.grade
+                    .filter((grade) => grade.hasPassed === true)
+                    .reduce((sum, grade) => sum + grade.male + grade.female, 0)
+                  return (
+                      <>
+                      <tr key={index}>
+                        <td>{subjectData.subject}</td>
+                        <td>{totalRegistered}</td>
+                        <td>{((StuPassed/totalResultsCame) * 100).toFixed(2)}</td>
+                        <td>{totalResultsCame}</td>
+                        
+                        {subjectData.grade
+                        .filter((grade) => grade.resultsCame === false)
                         .map((grade, idx) => {
-                          const total = grade.male + grade.female;
-                          return(
-                              <>
-                                  <td key={idx}>{total || "0"}</td>
-                                  <td>{((total / totalResultsCame) * 100).toFixed(2)}</td>
-                              </>
-                          )
-                        })}
+                            const total = grade.male + grade.female;
+                            return(
+                                <td>{total || 0}</td>
+                            )
+                        }
+                        )}
+                      </tr>
+                      <tr>
                       
-                    </tr>
-                    <tr>
-                    
-                    </tr>
-                </>
-                );
-              })}
-            </tbody>
-          </table>
-        ) : (
-          <p></p>
-        )}
+                      </tr>
+                  </>
+                  );
+                })}
+              </tbody>
+            </table>
+            <button className="medium-btn" onClick={() => GeneratePDF(results)}>Download PdF</button>
+            <hr />
+          </>
+          ) : (
+            <p></p>
+          )}
+          
+        </div>
       </div>
-      <div>
-        
-        {showTable && results && results.length > 0 ? (
-          <>
-          <table className="core-table">
-            <caption>CORE SUBJECTS PERCENTAGE PASSES</caption>
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th>Total Candidates Registered</th>
-                <th>Overall % Pass</th>
-                <th>Candidates with Results</th>
-                <th>Total Cancelled</th>
-                <th>Total Absent</th>
-                <th>Results Held</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((subjectData, index) => {
-                const totalRegistered = subjectData.totalStudents?.Total || 0;
-
-                // Calculate the total number of students whose results came
-                const totalResultsCame = subjectData.grade
-                  .filter((grade) => grade.resultsCame === true)
-                  .reduce((sum, grade) => sum + grade.male + grade.female, 0);
-                const StuPassed = subjectData.grade
-                  .filter((grade) => grade.hasPassed === true)
-                  .reduce((sum, grade) => sum + grade.male + grade.female, 0)
-                return (
-                    <>
-                    <tr key={index}>
-                      <td>{subjectData.subject}</td>
-                      <td>{totalRegistered}</td>
-                      <td>{((StuPassed/totalResultsCame) * 100).toFixed(2)}</td>
-                      <td>{totalResultsCame}</td>
-                      
-                      {subjectData.grade
-                      .filter((grade) => grade.resultsCame === false)
-                      .map((grade, idx) => {
-                          const total = grade.male + grade.female;
-                          return(
-                              <td>{total || 0}</td>
-                          )
-                      }
-                      )}
-                    </tr>
-                    <tr>
-                    
-                    </tr>
-                </>
-                );
-              })}
-            </tbody>
-          </table>
-          <button className="medium-btn" onClick={() => GeneratePDF(results)}>Download PdF</button>
-        </>
-        ) : (
-          <p></p>
-        )}
-        
-      </div>
-      
     </>
   );
 }

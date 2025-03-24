@@ -90,20 +90,25 @@ export default function GenerateOnlySubject({ studentsData }) {
       <h3>GET PARTICULAR SUBJECT RESULTS OF STUDENT</h3>
       <form onSubmit={HandleSubmit}>
           <div className="form-container">
-            <label htmlFor="subjectName">Enter Subject Name:</label>
-            <input
-              id="subjectName"
-              name="subjectName"
-              type="text"
-              placeholder="Physics, Chemistry, French..."
-              required
-            />
-            <button type="submit" className="small-btn">Submit</button>
+            <div className="search-contain">
+              <label htmlFor="subjectName">Enter Subject Name:</label>
+              <input
+                id="subjectName"
+                name="subjectName"
+                type="text"
+                placeholder="Physics, Chemistry, French..."
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" className="small-btn">Submit</button>
+            </div>
           </div>
       </form>
 
       {results.length > 0 ? (
         <>
+          <div className="table-container" style={{overflowX: "auto"}}>
           <table>
             <caption>
               Students Taking {results[0].matchedSubject}: {results.length} Students
@@ -130,6 +135,7 @@ export default function GenerateOnlySubject({ studentsData }) {
             </tbody>
           </table>
           <button className="medium-btn" onClick={() => GeneratePDF(results, subjectName)}>Download PDF</button>
+          </div>
         </>
       ) : subjectName ? (
         <p>No students found for "{subjectName}".</p>

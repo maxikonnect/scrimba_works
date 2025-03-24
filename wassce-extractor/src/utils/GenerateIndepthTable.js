@@ -86,103 +86,103 @@ export default function GenerateTable({ studentsData }) {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <button type="submit" className="btn">
-            {showTable ? "Hide Detailed Results Table" : "Generate Full Detailed Results"}
-          </button>
-        </form>
-      </div>
-
-      {showTable && results && (
-        <div className="table-container" style={{overflowX: "auto"}}>
-          <table className="table">
-            <caption>WASSCE Results Analysis</caption>
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th colSpan="8"></th>
-                <th colSpan="18">Grades</th>
-              </tr>
-              <tr>
-                <td></td>
-                <td colSpan="2">Total Candidates Registered</td>
-                <td colSpan="2">Total Number Cancelled</td>
-                <td colSpan="2">Total Number Absent</td>
-                <td colSpan="2">Results Held</td>
-                <td colSpan="2">A1</td>
-                <td colSpan="2">B2</td>
-                <td colSpan="2">B3</td>
-                <td colSpan="2">C4</td>
-                <td colSpan="2">C5</td>
-                <td colSpan="2">C6</td>
-                <td colSpan="2">D7</td>
-                <td colSpan="2">E8</td>
-                <td colSpan="2">F9</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-                <td>M</td>
-                <td>F</td>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((subjectData) => (
-                <tr key={subjectData.subject}>
-                  <td>{subjectData.subject}</td>
-                  <td>{subjectData.totalStudents.Male}</td>
-                  <td>{subjectData.totalStudents.Female}</td>
-                  {subjectData.grade
-                    .filter((studentGrade) => !studentGrade.resultsCame)
-                    .map((getGrade) => (
-                      <>
-                        <td>{getGrade.male}</td>
-                        <td>{getGrade.female}</td>
-                      </>
-                    ))}
-                  {subjectData.grade
-                    .filter((studentGrade) => studentGrade.resultsCame)
-                    .map((getGrade) => (
-                      <>
-                        <td>{getGrade.male}</td>
-                        <td>{getGrade.female}</td>
-                      </>
-                    ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <button className="medium-btn" onClick={() => GeneratePdf(results)}>Download PDF</button>
-          <div>
-
-          </div>
+      <div className="generateTable">
+        <div>
+          <form onSubmit={handleSubmit}>
+            <button type="submit" className="generatebtn">
+              {showTable ? "Hide Detailed Results Table" : "Generate Full Detailed Results"}
+            </button>
+          </form>
         </div>
-        
-      )}
+
+        {showTable && results && (
+          <div className="table-container" style={{overflowX: "auto"}}>
+            <table className="table">
+              <caption>WASSCE Results Analysis (**FOR MIXED SCHOOLS **)</caption>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th colSpan="8"></th>
+                  <th colSpan="18">Grades</th>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colSpan="2">Total Candidates Registered</td>
+                  <td colSpan="2">Total Number Cancelled</td>
+                  <td colSpan="2">Total Number Absent</td>
+                  <td colSpan="2">Results Held</td>
+                  <td colSpan="2">A1</td>
+                  <td colSpan="2">B2</td>
+                  <td colSpan="2">B3</td>
+                  <td colSpan="2">C4</td>
+                  <td colSpan="2">C5</td>
+                  <td colSpan="2">C6</td>
+                  <td colSpan="2">D7</td>
+                  <td colSpan="2">E8</td>
+                  <td colSpan="2">F9</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                  <td>M</td>
+                  <td>F</td>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((subjectData) => (
+                  <tr key={subjectData.subject}>
+                    <td>{subjectData.subject}</td>
+                    <td>{subjectData.totalStudents.Male}</td>
+                    <td>{subjectData.totalStudents.Female}</td>
+                    {subjectData.grade
+                      .filter((studentGrade) => !studentGrade.resultsCame)
+                      .map((getGrade) => (
+                        <>
+                          <td>{getGrade.male}</td>
+                          <td>{getGrade.female}</td>
+                        </>
+                      ))}
+                    {subjectData.grade
+                      .filter((studentGrade) => studentGrade.resultsCame)
+                      .map((getGrade) => (
+                        <>
+                          <td>{getGrade.male}</td>
+                          <td>{getGrade.female}</td>
+                        </>
+                      ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button className="medium-btn" onClick={() => GeneratePdf(results)}>Download PDF</button>
+            <hr />
+          </div>
+
+        )}
+      </div>
     </>
   );
 }

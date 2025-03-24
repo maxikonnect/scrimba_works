@@ -73,14 +73,14 @@ export default function GenerateTable({ studentsData }) {
     <div className="generateTable">
       <div className="generateForm">
         <form onSubmit={HandleSubmit}>
-          <button type="submit" className="btn">
+          <button type="submit" className="generatebtn">
             {showTable ? "Hide Summary Results Table" : "Generate Results Summary"}
           </button>
         </form>
       </div>
 
       {showTable && results && (
-        <div className="table-container">
+        <div className="table-container" style={{ overflowX: "auto" }}>
           <table className="table">
             <caption>WASSCE Results Analysis</caption>
             <thead>
@@ -135,10 +135,10 @@ export default function GenerateTable({ studentsData }) {
               ))}
             </tbody>
           </table>
-
-          <button onClick={GeneratePDF} className="small-btn">
+          <button onClick={GeneratePDF} className="medium-btn">
             Download PDF
           </button>
+          <hr />
         </div>
       )}
     </div>

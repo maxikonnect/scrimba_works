@@ -27,7 +27,7 @@ function Login() {
   };
 
   return (
-    <main class="login-form-container">
+    <main className="login-form-container">
       <form onSubmit={handleSubmit} className="loginForm">
         
         <div className="loginsubContain">

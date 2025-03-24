@@ -61,7 +61,7 @@ const SpecificGradeMultipleTimes = ({ studentsData }) => {
 
   return (
     <div className="result-checker">
-      <form onSubmit={Search}>
+      <form className="generalInfo" onSubmit={Search}>
         <h3>Find Students Who Got A Specific Grade Multiple Times.</h3>
             <div className="form-container">
               <div className="search-contain">

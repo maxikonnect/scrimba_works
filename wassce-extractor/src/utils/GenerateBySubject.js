@@ -85,22 +85,26 @@ export default function GenerateBySubject({ studentsData }) {
       <form onSubmit={HandleSubmit}>
         <h3>SEARCH FOR STUDENTS WHO TAKE A PARTICULAR SUBJECT</h3>
         <div className="form-container">
-          <label htmlFor="subjectName">Enter Subject Name:</label>
-          <input
-            id="subjectName"
-            name="subjectName"
-            type="text"
-            placeholder="Physics, Chemistry, French..."
-            required
-          />
-          <button type="submit" className="small-btn">Submit</button>
+          <div className="search-contain">
+              <label htmlFor="subjectName">Enter Subject Name:</label>
+              <input
+                id="subjectName"
+                name="subjectName"
+                type="text"
+                placeholder="Physics, Chemistry, French..."
+                required
+              />
+          </div>
+          <div className="search-contain">
+            <button type="submit" className="small-btn">Submit</button>
+          </div> 
         </div>
       </form>
       
       {results.length > 0 ? (
       <>
         <table>
-            <caption>Students Taking {results[0].matchedSubject}: {results.length} Students</caption>
+            <caption className="captionInfo">Students Taking {results[0].matchedSubject}: {results.length} Students</caption>
           <thead>
             <tr>
               <th>#</th>
