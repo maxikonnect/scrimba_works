@@ -1,0 +1,36 @@
+
+:root{
+    
+    /*COLOR */
+    --color-white: #f4f4f4;
+    --color-black: #343434;
+    --color-blue: rgb(59, 59, 229);
+    --color-red: red;
+    --color-green: green;
+
+
+    /* Message */
+    --error-text: var(--color-red);
+    --valid-text: var(--color-green);
+
+
+    /* FONT SIZE */
+    --font-size-smaller: 1rem;
+    --font-size-small: 1.2rem;
+    --font-size-medium: 1.5rem;
+    --font-size-large: 1.8rem;
+    --font-size-x-large: 2.5rem;
+    --font-size-xx-large: 3rem;
+    --font-size-xxx-large: 3.5rem;
+    --font-size-xxxx-large: 4.2rem;
+
+    /*Line Height */
+    --line-height-small: 1.2;
+    --line-height-medium: 1.5;
+    --line-height-large: 1.8;
+
+    /*Font Weight */
+    --font-weight-lightbold: 400;
+    --font-weight-bold: 500;
+    --font-weight-bolder: 700;
+}
