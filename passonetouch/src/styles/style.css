@@ -33,4 +33,20 @@
     --font-weight-lightbold: 400;
     --font-weight-bold: 500;
     --font-weight-bolder: 700;
+
+
+    /*section */
+    --section-margin: 2rem;
+    --section-top-bottom-margin: 2rem 0;
+    --section-left-right-margin: 0 2rem;
+    
+}
+
+*{
+    font-family: "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
 }
