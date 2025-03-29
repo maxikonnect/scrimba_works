@@ -1,0 +1,931 @@
+
+const resultsAnalysis = [
+    {   
+        id: 1,
+        subject: "Elective Mathematics",
+        grades: [
+          { 
+            id:"A1",
+            male: 29,
+            female: 36,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B2",
+            male: 38, 
+            female: 32,
+            passed: true,
+            resultsCame: true, 
+          },
+          { 
+            id:"B3",
+            male: 54, 
+            female: 35,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C4",
+            male: 16, 
+            female: 6,
+            passed: true,
+            resultsCame: true, 
+          },
+          { 
+            id:"C5",
+            male: 11, 
+            female: 1,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C6",
+            male: 11, 
+            female: 7,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"D7",
+            male: 6, 
+            female: 6,
+            passed: false,
+            resultsCame: true, 
+          },
+          { 
+            id:"E8",
+            male: 4, 
+            female: 7,
+            passed:false,
+            resultsCame: true,
+
+          },
+          { 
+            id:"F9",
+            male: 4, 
+            female: 1,
+            passed:false, 
+            resultsCame: true,
+          },
+          { 
+            id:"Withheld",
+            male: 0, 
+            female: 0 
+          },
+          { 
+            id:"Cancelled",
+            male: 0, 
+            female: 1, 
+          }, 
+          { 
+            id:"absent",
+            male: 2,
+            female: 1,
+          },
+        ]
+    }, 
+    {   
+        id: 2,
+        subject: "Biology",
+        grades: [
+          { 
+            id:"A1",
+            male: 0,
+            female: 0,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B2",
+            male: 1, 
+            female: 0,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B3",
+            male: 35, 
+            female: 71,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C4",
+            male: 19, 
+            female: 45, 
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C5",
+            male: 10, 
+            female: 48,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C6",
+            male: 11, 
+            female: 56, 
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"D7",
+            male: 3, 
+            female: 13, 
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"E8",
+            male: 0, 
+            female: 6,
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"F9",
+            male: 0, 
+            female: 2,
+            passed:false,
+            resultsCame: true,
+          },
+          { 
+            id:"Withheld",
+            male: 0, 
+            female: 0 
+          },
+          { 
+            id:"Cancelled",
+            male: 0, 
+            female: 0, 
+          }, 
+          { 
+            id:"absent",
+            male: 1,
+            female: 0,
+          },
+        ]
+    }, 
+    {   
+        id: 3,
+        subject: "Chemistry",
+        grades: [
+          { 
+            id:"A1",
+            male: 6,
+            female: 5,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B2",
+            male: 14, 
+            female: 12,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B3",
+            male: 53, 
+            female: 37,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C4",
+            male: 4, 
+            female: 6,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C5",
+            male: 3, 
+            female: 3,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C6",
+            male: 2, 
+            female: 1,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"D7",
+            male: 1, 
+            female: 1, 
+            passed:false,
+            resultsCame: true,
+          },
+          { 
+            id:"E8",
+            male: 0, 
+            female: 0, 
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"F9",
+            male: 0, 
+            female: 0, 
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"Withheld",
+            male: 0, 
+            female: 0 
+          },
+          { 
+            id:"Cancelled",
+            male: 1, 
+            female: 0, 
+          },
+          { 
+            id:"absent",
+            male: 1,
+            female: 0,
+          },
+        ]
+    },
+    {   
+        id: 4,
+        subject: "Physics",
+        grades: [
+          { 
+            id:"A1",
+            male: 0,
+            female: 0,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"B2",
+            male: 1, 
+            female: 0,
+            passed: true, 
+            resultsCame: true,
+          },
+          { 
+            id:"B3",
+            male: 24, 
+            female: 15,
+            passed: true, 
+            resultsCame: true,
+          },
+          { 
+            id:"C4",
+            male: 13, 
+            female: 18,
+            passed: true, 
+            resultsCame: true,
+          },
+          { 
+            id:"C5",
+            male: 20, 
+            female: 14,
+            passed: true,
+            resultsCame: true,
+          },
+          { 
+            id:"C6",
+            male: 23, 
+            female: 17,
+            passed: true, 
+            resultsCame: true,
+          },
+          { 
+            id:"D7",
+            male: 3, 
+            female: 1,
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"E8",
+            male: 0, 
+            female: 0,
+            passed: false,
+            resultsCame: true,
+          },
+          { 
+            id:"F9",
+            male: 0, 
+            female: 0,
+            passed: false, 
+            resultsCame: true,
+          },
+          { 
+            id:"withheld",
+            male: 0, 
+            female: 0 
+          },
+          { 
+            id:"cancelled",
+            male: 0, 
+            female: 0, 
+          },
+          { 
+            id:"absent",
+            male: 0,
+            female: 0,
+          },
+        ]
+    },
+    {   
+      id: 5,
+      subject: "Integerated Science",
+      grades: [
+        { 
+          id:"A1",
+          male: 10,
+          female: 19,
+          passed: true,
+          resultsCame: true,
+        },
+        { 
+          id:"B2",
+          male: 63, 
+          female: 68,
+          passed: true, 
+          resultsCame: true,
+        },
+        { 
+          id:"B3",
+          male: 287, 
+          female: 364,
+          passed: true, 
+          resultsCame: true,
+        },
+        { 
+          id:"C4",
+          male: 117, 
+          female: 106,
+          passed: true, 
+          resultsCame: true,
+        },
+        { 
+          id:"C5",
+          male: 59, 
+          female: 34,
+          passed: true,
+          resultsCame: true,
+        },
+        { 
+          id:"C6",
+          male: 56, 
+          female: 45,
+          passed: true, 
+          resultsCame: true,
+        },
+        { 
+          id:"D7",
+          male: 13, 
+          female: 11,
+          passed: false,
+          resultsCame: true,
+           
+        },
+        { 
+          id:"E8",
+          male: 0, 
+          female: 1,
+          passed: false, 
+          resultsCame: true,
+        },
+        { 
+          id:"F9",
+          male: 1, 
+          female: 0,
+          passed: false, 
+          resultsCame: true,
+        },
+        { 
+          id:"withheld",
+          male: 0, 
+          female: 0 
+        },
+        { 
+          id:"cancelled",
+          male: 0, 
+          female: 0, 
+        },
+        {
+          id: "absent",
+          male: 7,
+          female: 4
+        }
+      ]
+  },  
+  {   
+    id: 6,
+    subject: "Mathematics(core)",
+    grades: [
+      { 
+        id:"A1",
+        male: 167,
+        female: 205,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 181, 
+        female: 212,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 214, 
+        female: 211,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 32, 
+        female: 9,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 9, 
+        female: 5,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 4, 
+        female: 0,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 0, 
+        female: 0,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 1, 
+        female: 0,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 0, 
+        female: 0,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 0, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 5,
+        female: 10,
+      },
+    ]
+  }, 
+  {   
+    id: 7,
+    subject: "Social Studies",
+    grades: [
+      { 
+        id:"A1",
+        male: 6,
+        female: 12,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 22, 
+        female: 16,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 116, 
+        female: 146,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 84, 
+        female: 90,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 73, 
+        female: 97,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 114, 
+        female: 130,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 82, 
+        female: 100,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 48, 
+        female: 32,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 61, 
+        female: 25,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 1, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 6,
+        female: 4,
+      },
+    ]
+  },  
+  {   
+    id: 8,
+    subject: "English",
+    grades: [
+      { 
+        id:"A1",
+        male: 1,
+        female: 1,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 41, 
+        female: 50,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 303, 
+        female: 337,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 133, 
+        female: 131,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 59, 
+        female: 49,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 39, 
+        female: 69,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 20, 
+        female: 9,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 6, 
+        female: 2,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 6, 
+        female: 0,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 0, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 5,
+        female: 4,
+      },
+    ]
+  }, 
+  {   
+    id: 9,
+    subject: "Accounting",
+    grades: [
+      { 
+        id:"A1",
+        male: 0,
+        female: 0,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 3, 
+        female: 2,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 22, 
+        female: 5,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 14, 
+        female: 6,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 5, 
+        female: 4,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 16, 
+        female: 8,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 8, 
+        female: 3,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 10, 
+        female: 2,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 5, 
+        female: 0,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 0, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 2,
+        female: 0,
+      },
+    ]
+  },
+  {   
+    id: 9,
+    subject: "Business Management",
+    grades: [
+      { 
+        id:"A1",
+        male: 54,
+        female: 15,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 8, 
+        female: 6,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 16, 
+        female: 7,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 1, 
+        female: 1,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 2, 
+        female: 1,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 3, 
+        female: 0,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 0, 
+        female: 0,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 0, 
+        female: 0,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 0, 
+        female: 0,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 0, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 1,
+        female: 0,
+      },
+    ]
+  },
+  {   
+    id: 10,
+    subject: "Christian Religious Studies",
+    grades: [
+      { 
+        id:"A1",
+        male: 2,
+        female: 1,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"B2",
+        male: 1, 
+        female: 2,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"B3",
+        male: 8, 
+        female: 13,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C4",
+        male: 12, 
+        female: 25,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"C5",
+        male: 15, 
+        female: 17,
+        passed: true,
+        resultsCame: true,
+      },
+      { 
+        id:"C6",
+        male: 34, 
+        female: 48,
+        passed: true, 
+        resultsCame: true,
+      },
+      { 
+        id:"D7",
+        male: 8, 
+        female: 18,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"E8",
+        male: 12, 
+        female: 12,
+        passed: false,
+        resultsCame: true,
+      },
+      { 
+        id:"F9",
+        male: 6, 
+        female: 5,
+        passed: false, 
+        resultsCame: true,
+      },
+      { 
+        id:"withheld",
+        male: 2, 
+        female: 0 
+      },
+      { 
+        id:"cancelled",
+        male: 0, 
+        female: 0, 
+      },
+      { 
+        id:"absent",
+        male: 2,
+        female: 1,
+      },
+    ]
+  },                                                     
+];
+
+export default resultsAnalysis;

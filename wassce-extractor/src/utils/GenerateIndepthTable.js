@@ -6,11 +6,12 @@ import autoTable from "jspdf-autotable"
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
   const [showTable, setShowTable] = useState(false); // State for toggling table
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
     if (!Array.isArray(studentsData) || studentsData.length === 0) {
-      alert("No data uploaded");
+      setErrorMessage("No data uploaded");
       return;
     }
 
@@ -24,10 +25,11 @@ export default function GenerateTable({ studentsData }) {
     setResults(groupSubjects);
     setShowTable(!showTable); // ✅ Toggle table visibility
   }
-  console.log(results);
+
+
   function GeneratePdf(resultsData) {
     if (!Array.isArray(resultsData) || resultsData.length === 0) {
-      alert("No data available for export");
+      setErrorMessage("No data available for export");
       return;
     }
   
@@ -87,6 +89,7 @@ export default function GenerateTable({ studentsData }) {
   return (
     <>
       <div className="generateTable">
+        <hr />
         <div>
           <form onSubmit={handleSubmit}>
             <button type="submit" className="generatebtn">
@@ -94,7 +97,7 @@ export default function GenerateTable({ studentsData }) {
             </button>
           </form>
         </div>
-
+        {!results ? <p className="error-message">{errorMessage}</p> : ""}
         {showTable && results && (
           <div className="table-container" style={{overflowX: "auto"}}>
             <table className="table">
@@ -178,7 +181,6 @@ export default function GenerateTable({ studentsData }) {
               </tbody>
             </table>
             <button className="medium-btn" onClick={() => GeneratePdf(results)}>Download PDF</button>
-            <hr />
           </div>
 
         )}

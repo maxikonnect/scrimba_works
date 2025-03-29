@@ -2,22 +2,24 @@ import { useState } from "react";
 import { CountGrade } from "./gradeAnalysis";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import * as XLSX from "xlsx";
 
 export default function GenerateTable({ studentsData }) {
   const [results, setResults] = useState(null);
   const [showTable, setShowTable] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function HandleSubmit(event) {
     event.preventDefault();
     if (!Array.isArray(studentsData) || studentsData.length === 0) {
-      alert("No data uploaded");
+      setErrorMessage("Kindly Upload pdf Data");
       return;
     }
 
     const subjectElements = studentsData.map((data) => data["Subjects"]);
     const subjectNames = [...new Set(subjectElements.flatMap((subjects) => Object.keys(subjects)))];
     const subjects = subjectNames.filter((subject) => /[a-zA-Z]/.test(subject));
-    
+
     const groupSubjects = subjects.map((subject, index) => CountGrade(studentsData, `${index + 1}`, subject));
 
     setResults(groupSubjects);
@@ -26,7 +28,7 @@ export default function GenerateTable({ studentsData }) {
 
   function GeneratePDF() {
     if (!results || results.length === 0) {
-      alert("No data available to generate PDF");
+      setErrorMessage("No data available to generate PDF");
       return;
     }
 
@@ -69,6 +71,60 @@ export default function GenerateTable({ studentsData }) {
     doc.save("WASSCE_Results_Analysis.pdf");
   }
 
+  function ExportToExcel() {
+    if (!Array.isArray(results) || results.length === 0) {
+      setErrorMessage("No data available to generate Excel");
+      return;
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(
+      results.map((subjectData) => ({
+        Subject: subjectData.subject,
+        A1: subjectData.grade[0]?.male + subjectData.grade[0]?.female || 0,
+        B2: subjectData.grade[1]?.male + subjectData.grade[1]?.female || 0,
+        B3: subjectData.grade[2]?.male + subjectData.grade[2]?.female || 0,
+        C4: subjectData.grade[3]?.male + subjectData.grade[3]?.female || 0,
+        C5: subjectData.grade[4]?.male + subjectData.grade[4]?.female || 0,
+        C6: subjectData.grade[5]?.male + subjectData.grade[5]?.female || 0,
+        D7: subjectData.grade[6]?.male + subjectData.grade[6]?.female || 0,
+        E8: subjectData.grade[7]?.male + subjectData.grade[7]?.female || 0,
+        F9: subjectData.grade[8]?.male + subjectData.grade[8]?.female || 0,
+        "Percentage Pass": (
+          (subjectData.grade
+            .filter((studentGrade) => studentGrade.hasPassed)
+            .reduce((total, acc) => total + acc.male + acc.female, 0) /
+            subjectData.grade
+              .filter((studentGrade) => studentGrade.resultsCame)
+              .reduce((total, acc) => total + acc.male + acc.female, 0)) *
+          100
+        ).toFixed(2),
+        "Total Candidates": subjectData.grade
+          .filter((studentGrade) => studentGrade.resultsCame)
+          .reduce((total, acc) => total + acc.male + acc.female, 0),
+      }))
+    );
+
+    worksheet["!cols"]=[
+      { wch: 22 }, // Subject column width
+      { wch: 6 },  // A1
+      { wch: 6 },  // B2
+      { wch: 6 },  // B3
+      { wch: 6 },  // C4
+      { wch: 6 },  // C5
+      { wch: 6 },  // C6
+      { wch: 6 },  // D7
+      { wch: 6 },  // E8
+      { wch: 6 },  // F9
+      { wch: 15 }, // Percentage Pass
+      { wch: 15 }, // Total Candidates
+    ]
+
+    
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "WASSCE Results");
+    XLSX.writeFile(workbook, "WASSCE_Results_Analysis.xlsx");
+  }
+
   return (
     <div className="generateTable">
       <div className="generateForm">
@@ -77,6 +133,7 @@ export default function GenerateTable({ studentsData }) {
             {showTable ? "Hide Summary Results Table" : "Generate Results Summary"}
           </button>
         </form>
+        {!results ? <p className="error-message">{errorMessage}</p> : ""}
       </div>
 
       {showTable && results && (
@@ -138,7 +195,9 @@ export default function GenerateTable({ studentsData }) {
           <button onClick={GeneratePDF} className="medium-btn">
             Download PDF
           </button>
-          <hr />
+          <button onClick={ExportToExcel} className="medium-btn">
+            Download Excel
+          </button>
         </div>
       )}
     </div>

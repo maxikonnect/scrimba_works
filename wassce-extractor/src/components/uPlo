@@ -4,7 +4,6 @@ import { processExtractedText } from "../utils/studentProcessor";
 
 export default function UploadPDF({ setStudentsData }) {
   const [fileName, setFileName] = useState("");
-  
 
   async function handleFileUpload(event) {
     const file = event.target.files[0];

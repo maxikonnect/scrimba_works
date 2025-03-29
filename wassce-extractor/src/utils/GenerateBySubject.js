@@ -82,6 +82,7 @@ export default function GenerateBySubject({ studentsData }) {
   }
   return (
     <div className="result-checker">
+      <hr />
       <form onSubmit={HandleSubmit}>
         <h3>SEARCH FOR STUDENTS WHO TAKE A PARTICULAR SUBJECT</h3>
         <div className="form-container">
@@ -133,6 +134,7 @@ export default function GenerateBySubject({ studentsData }) {
           </tbody>
         </table>
         <button className='medium-btn' onClick={()=>GeneratePDF(results)}>Download PDF</button>
+        
       </>
       ) : subjectName ? (
         <p>No Subject with name "{subjectName}".</p>

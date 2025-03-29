@@ -11,6 +11,7 @@ import GenerateCoreSubject from "../utils/GenerateCoreSubject";
 import '../styles/reset.css';
 import Navbar from '../components/Navbar';
 import Subjects from '../components/subjects';
+import GenerateBestStudents from "../utils/GenerateBestStudents"
 
 export default function Home() {  
   const [studentsData, setStudentsData] = useState([]);
@@ -56,12 +57,14 @@ export default function Home() {
               <GenerateTable studentsData={studentsData} />
               <GenerateIndepthTable studentsData={studentsData} />
               <GenerateCoreSubject studentsData={studentsData} />
+              <GenerateBestStudents studentsData={studentsData} />
+              
             <div className="detailedResults">
               <SpecificGradeMultipleTimes studentsData={studentsData} />
               <SearchSingleStudent studentsData={studentsData} />
               
               <Subjects studentsData={studentsData}/>
-              <hr style={{borderBottom: "1px solid #0074a7;"}}/>
+              <hr style={{borderBottom: "1px solid #0074a7"}}/>
               <GenerateBySubject studentsData={studentsData} />
               <GenerateOnlySubject studentsData={studentsData} />
             </div>

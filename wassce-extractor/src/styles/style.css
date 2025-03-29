@@ -11,6 +11,7 @@
     --color-blue: #0074a7;
     --color-yellow:#f5f552;
     --color-red: var(--color-blue);
+    --color-redd: rgb(251, 30, 30);
     /* Text */
     --text-color: var(--color-black);
     --valid-color: var(--color-green);
@@ -314,6 +315,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   width: 150px;
+  margin-right: 10px;
 }
 .btn{
   width: 50%;
@@ -455,6 +457,8 @@
 }
 .search-contain{
   margin: .6em 0;
+  display: flex;
+  align-items: center;
 }
 
 .search-contain input{
@@ -488,9 +492,7 @@ table{
   border: 1px solid var(--color-red);
 }
 
-th{
 
-}
 td,th{
   padding: .3em;
   border: 1px solid var(--color-red);
@@ -531,4 +533,40 @@ td,th{
     display: grid;
     grid-template-columns: 1fr;
   }
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fileName {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+progress {
+  width: 100%;
+  height: 10px;
+  margin-top: 10px;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+progress::-webkit-progress-value {
+  background-color: #007bff;
+}
+
+
+/*ERRRO MESSAGE */
+.error-message{
+  font-size: var(--font-size-medium);
+  color: var(--color-redd);
 }

@@ -87,7 +87,7 @@ const SpecificGradeMultipleTimes = ({ studentsData }) => {
       {Array.isArray(results) ? (
         <>
             <table>
-              <caption>
+              <caption style={{fontSize: "1.5rem", color: "green"}}>
                 {results.length} {results.length === 1 ? "Student" : "Students"}{" "}
                 got <strong>At least</strong> {numberOfTimes} {countGrade}'s
               </caption>

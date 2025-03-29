@@ -1,6 +1,7 @@
 import { useState } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import XLSX from "xlsx-js-style";
 
 export default function GenerateOnlySubject({ studentsData }) {
   const [results, setResults] = useState([]);
