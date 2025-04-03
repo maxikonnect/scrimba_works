@@ -1,38 +1,41 @@
-.App {
+:root{
+  --text-color1: #ffffff;
+  --text-color2: #333;
+  --background: #0000FF;
+}
+
+
+table{
+  border: 1px solid #333;
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th{
+  background-color: var(--background);
+  color: var(--text-color1);
+}
+
+.gradeHeader{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+td, th{
+  padding: 3px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.gradeTotal{
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+tr:nth-child(even){
+  background-color: #f2f2f2;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.absentTable{
+  width: 50%;
 }

@@ -320,7 +320,15 @@ const studentsData =
         "GOVERNMENT": "C4"
       }
     },
-    {
+    
+]
+
+export default studentsData;
+
+
+/*
+
+{
       "Index": "0051801021",
       "Name": "ACHEAMPOMAA ALICIA BAAFI",
       "Gender": "Female",
@@ -1600,6 +1608,7 @@ const studentsData =
         "GEN KNOW IN ART": "B3"
       }
     },
-]
 
-export default studentsData;
+
+
+*/

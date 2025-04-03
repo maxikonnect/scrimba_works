@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import Social from './Social';
+import Navbar from './Nav';
 
 
-const Header = () =>{
+
+const Header = ({ scrollToAbout, scrollToServices, scrollToTestimonial }) =>{
     return (
-        <h2>Header</h2>
+        <header>
+            <Social />
+            <Navbar
+                scrollToAbout={scrollToAbout}
+                scrollToServices={scrollToServices}
+                scrollToTestimonial={scrollToTestimonial}
+            />
+        </header>
     )
 }
 
