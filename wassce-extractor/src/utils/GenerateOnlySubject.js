@@ -1,7 +1,7 @@
 import { useState } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import XLSX from "xlsx-js-style";
+
 
 export default function GenerateOnlySubject({ studentsData }) {
   const [results, setResults] = useState([]);
@@ -87,8 +87,9 @@ export default function GenerateOnlySubject({ studentsData }) {
   }
 
   return (
-    <div className="result-checker">
+    <div className="generateTable">
       <h3>GET PARTICULAR SUBJECT RESULTS OF STUDENT</h3>
+      <div>
       <form onSubmit={HandleSubmit}>
           <div className="form-container">
             <div className="search-contain">
@@ -106,6 +107,7 @@ export default function GenerateOnlySubject({ studentsData }) {
             </div>
           </div>
       </form>
+      </div>
 
       {results.length > 0 ? (
         <>
@@ -139,7 +141,7 @@ export default function GenerateOnlySubject({ studentsData }) {
           </div>
         </>
       ) : subjectName ? (
-        <p>No students found for "{subjectName}".</p>
+        <p className="error-message">No students found for "{subjectName}".</p>
       ) : null}
     </div>
   );

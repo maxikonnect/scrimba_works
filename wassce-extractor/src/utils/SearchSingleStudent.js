@@ -123,7 +123,7 @@ export default function SearchSingleStudent({ studentsData }) {
           <button className="medium-btn" onClick={() => generatePDF(results)}>Download PDF</button>
         </>
       ) : results ? (
-        <p>{results}</p>
+        <p className="error-message">{results}</p>
       ) : null}
     </div>
   );

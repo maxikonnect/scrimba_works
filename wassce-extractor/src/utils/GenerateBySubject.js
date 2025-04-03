@@ -137,7 +137,7 @@ export default function GenerateBySubject({ studentsData }) {
         
       </>
       ) : subjectName ? (
-        <p>No Subject with name "{subjectName}".</p>
+        <p className="error-message">No Subject with name "{subjectName}".</p>
       ) : null}
     </div>
   );

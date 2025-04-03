@@ -121,7 +121,7 @@ const SpecificGradeMultipleTimes = ({ studentsData }) => {
             <button className="medium-btn" onClick={() => GeneratePDF(results)}>Download PDF</button>
         </>
       ) : results ? (
-        <p>{results}</p>
+        <p className="info">{results}</p>
       ) : null}
     </div>
   );

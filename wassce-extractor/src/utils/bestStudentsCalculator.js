@@ -16,7 +16,7 @@ export default function bestStudentsCalculator(studentsData) {
   // Define grade rankings
   const gradeOrder = {
     "A1": 1, "B2": 2, "B3": 3, "C4": 4, "C5": 5, "C6": 6,
-    "D7": 7, "E8": 8, "F9": 9, "*": 10, "W": 10, "X": 10
+    "D7": 7, "E8": 8, "F9": 9,
   };
 
   // Filter out students with invalid grades

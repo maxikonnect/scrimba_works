@@ -7,7 +7,9 @@ export default function GenerateBestStudents({ studentsData }) {
   const [results, setResults] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [numStudents, setNumStudents] = useState(""); // Store user input
+  const [selectedCourse, setSelectedCourse] = useState("All Subjects"); // Course selection
   const [showTable, setShowTable] = useState(false); // Control table visibility
+  const [summary, setSummary] = useState(null); // Store student summary
 
   function HandleSubmit(event) {
     event.preventDefault();
@@ -18,6 +20,9 @@ export default function GenerateBestStudents({ studentsData }) {
     }
 
     let filteredResults = bestStudentsCalculator(studentsData);
+    if (selectedCourse !== "All Subjects") {
+      filteredResults = filteredResults.filter(student => student.Course === selectedCourse);
+    }
 
     // Ensure valid number of students
     const limit = parseInt(numStudents, 10);
@@ -25,55 +30,97 @@ export default function GenerateBestStudents({ studentsData }) {
       filteredResults = filteredResults.slice(0, limit);
     }
 
+    // Generate summary statistics
+    const summaryData = {
+      totalStudents: filteredResults.length,
+      maleCount: filteredResults.filter((s) => s.Gender.toLowerCase() === "male").length,
+      femaleCount: filteredResults.filter((s) => s.Gender.toLowerCase() === "female").length,
+      courses: {},
+    };
+
+    filteredResults.forEach((student) => {
+      summaryData.courses[student.Course] = (summaryData.courses[student.Course] || 0) + 1;
+    });
+
     setResults(filteredResults);
+    setSummary(summaryData);
     setShowTable(true); 
   }
 
+  console.log(results)
   function GeneratePDF(results) {
     if (!Array.isArray(results) || results.length === 0) {
       setErrorMessage("No PDF uploaded yet");
       return;
     }
-
+  
     const doc = new jsPDF({ orientation: "landscape" });
-    doc.text(
-      `Returned ${results.length} students out of ${studentsData.length}
-      This result does not include students who got F9, who were absent,
-      whose results are withheld, or have at least one result cancelled.`,
-      10,
-      10
-    );
-
+  
+    // Start at Y position 10
+    let yPosition = 10;
+    const marginLeft = 10;
+  
+    // Title and summary text
+    const summaryText = `Top ${results.length} students out of ${studentsData.length}.
+  This result does not include students who got F9, were absent,
+  whose results are withheld, or have at least one result cancelled.`;
+  
+    // Wrap text to prevent overflow
+    const wrappedSummary = doc.splitTextToSize(summaryText, 270);
+    doc.text(wrappedSummary, marginLeft, yPosition);
+    yPosition += wrappedSummary.length * 6 + 10; // More space before next section
+  
+    if (summary) {
+      // Gender summary
+      doc.text(`Males: ${summary.maleCount}`, marginLeft, yPosition);
+      yPosition += 6;
+      doc.text(`Females: ${summary.femaleCount}`, marginLeft, yPosition);
+      yPosition += 6;
+  
+      // Course summary
+      doc.text("Students Per Course:", marginLeft, yPosition);
+      yPosition += 6;
+      Object.entries(summary.courses).forEach(([course, count]) => {
+        doc.text(`${course}: ${count} students`, marginLeft + 5, yPosition);
+        yPosition += 6;
+      });
+  
+      yPosition += 10; // Extra spacing before the table
+    }
+  
+    // Table setup
     const tableColumn = [
       "Index",
       "Student",
       "Gender",
+      "Course",
       "Core Subjects",
       "Elective Subjects",
       "Total Grade",
     ];
-
+  
     const tableRows = results.map((student) => {
-      const core_subjects = Object.entries(student.corePapers)
+      const coreSubjects = Object.entries(student.corePapers)
         .map(([subject, grade]) => `${subject}: ${grade}`)
         .join("\n");
-
-      const elective_subjects = Object.entries(student.electivePapers)
+  
+      const electiveSubjects = Object.entries(student.electivePapers)
         .map(([subject, grade]) => `${subject}: ${grade}`)
         .join("\n");
-
+  
       return [
         student.Index,
         student.Name,
         student.Gender,
-        core_subjects,
-        elective_subjects,
+        student.Course,
+        coreSubjects,
+        electiveSubjects,
         student.TotalGrade,
       ];
     });
-
+  
     autoTable(doc, {
-      startY: 30,
+      startY: yPosition,
       head: [tableColumn],
       body: tableRows,
       theme: "grid",
@@ -90,51 +137,72 @@ export default function GenerateBestStudents({ studentsData }) {
       },
       pageBreak: "auto",
     });
-
+  
     doc.save("Best_Students.pdf");
   }
+  
+  
 
   return (
     <div className="generateTable">
       <hr />
       <div>
-        <p style={{fontSize: "12px", fontWeight: "bold", color: "green"}}>
-            ***This Generates Students Total Grades, excluding students with F9,
-            Absent students or students with results cancelled.
-
-            You can specify the top number of students to generate by entering
-            a number***
+        <p style={{ fontSize: "12px", fontWeight: "bold", color: "green" }}>
+          ***This Generates Students Total Grades, excluding students with F9,
+          absent students or students with results cancelled. You can specify
+          the top number of students to generate by entering a number. For the Core Subjects,
+          ENGLISH And MATHEMATICS(CORE) with either CORE SCIENCE or SOCIAL STUDIES AND THREE BEST ELECTIVES***
         </p>
         <form onSubmit={HandleSubmit}>
-        <div className="form-container">
+          <div className="form-container">
             <div className="search-contain">
-                <label htmlFor="subjectName">Number of Students to Display:</label>
-                <input
-                  type="number"
-                  value={numStudents}
-                  onChange={(e) => setNumStudents(e.target.value)}
-                  min="1"
-                  max={studentsData.length}
-                  placeholder="Enter number"
-                />
+              <label htmlFor="subjectName">Number of Students to Display:</label>
+              <input
+                type="number"
+                value={numStudents}
+                onChange={(e) => setNumStudents(e.target.value)}
+                min="1"
+                max={studentsData.length} 
+                placeholder="Enter number"
+              />
+            </div>
+            <div className="search-contain">
+              <label htmlFor="courseSelect">Select Course:</label>
+              <select id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
+                <option value="All Subjects">All Subjects</option>
+                <option value="SCIENCE">General Science</option>
+                <option value="GENERAL ARTS">General Arts</option>
+                <option value="BUSINESS">Business</option>
+                <option value="VISUAL ARTS">Visual Arts</option>
+                <option value="HOME ECONOMICS">Home Economics</option>
+              </select>
             </div>
             <button type="submit" className="generatebtn">
               Show Best Students
             </button>
-            </div>
+          </div>
         </form>
       </div>
+
       {!results ? <p className="error-message">{errorMessage}</p> : ""}
       {showTable && results && (
+
         <div className="table-container" style={{ overflowX: "auto" }}>
+          <div className="summary-container">
+          <h3>Summary</h3>
+          <p className="info">Total Students: {summary.totalStudents}</p>
+          <p className="info">Male Students: {summary.maleCount}</p>
+          <p className="info">Female Students: {summary.femaleCount}</p>
+          <h4><strong>Students Per Course:</strong></h4>
+          <ul>
+            {Object.entries(summary.courses).map(([course, count]) => (
+              <li key={course} className="info">{course}: {count} students</li>
+            ))}
+          </ul>
+        </div>
           <table className="table">
             <caption>
               Returned Top {results.length} students out of {studentsData.length}
-              <p>
-                This result does not include students who got F9, who were
-                absent, whose results are withheld, or have at least one result
-                cancelled.
-              </p>
             </caption>
             <thead>
               <tr>
@@ -185,4 +253,3 @@ export default function GenerateBestStudents({ studentsData }) {
     </div>
   );
 }
-
