@@ -9,7 +9,7 @@ export async function extractTextFromPDF(file) {
 
   return new Promise((resolve, reject) => {
     reader.onload = async (e) => {
-      try {
+      try {cd
         const arrayBuffer = e.target.result;
         const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
